@@ -1,0 +1,5 @@
+setup-ec2-prod.sh
+.env
+.venv/
+*.tar
+__pycache__/
