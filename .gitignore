@@ -3,3 +3,4 @@ setup-ec2-prod.sh
 .venv/
 *.tar
 __pycache__/
+.DS_Store
