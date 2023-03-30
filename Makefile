@@ -1,17 +1,22 @@
-.PHONY: upgrade-pip deploy delete list
+.PHONY: upgrade-pip deploy delete list project-files
 
 # generate the requirements.txt file from the pyproject.toml file
-requirements.txt: pyproject.toml
-	pip-compile -o requirements.txt pyproject.toml --resolver=backtracking
+# requirements.txt: pyproject.toml
+# 	pip-compile -o requirements.txt pyproject.toml --resolver=backtracking
 
 # upgrade pip to the latest version
 upgrade-pip:
 	python -m pip install --upgrade pip
 
+# generate a tar file with project files
+project-files:
+	tar \
+	--exclude={'.git','.gitignore','requirements.txt','poetry.lock','README.md','Makefile','setup-ec2.sh','.venv','*.tar','.DS_Store'} \
+	-vzcf project-files.tar -C . .
+
 # deploy the feature-pipeline to an EC2 instance on AWS
-deploy: requirements.txt
-	tar -czvf src.tar ./src
-	waxctl aws deploy src.tar \
+deploy: project-files
+	waxctl aws deploy project-files.tar \
 		-f src/dataflow.py \
 		-r requirements.txt \
 		--system-setup-file-name ./setup-ec2.sh \
