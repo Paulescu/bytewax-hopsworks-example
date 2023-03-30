@@ -1,12 +1,4 @@
-.PHONY: upgrade-pip deploy delete list project-files
-
-# generate the requirements.txt file from the pyproject.toml file
-# requirements.txt: pyproject.toml
-# 	pip-compile -o requirements.txt pyproject.toml --resolver=backtracking
-
-# upgrade pip to the latest version
-upgrade-pip:
-	python -m pip install --upgrade pip
+.PHONY: deploy delete list project-files
 
 # generate a tar file with project files
 project-files:
@@ -22,11 +14,13 @@ deploy: project-files
 		--region us-east-1 \
 		-t t2.micro \
 		--name "bytewax" \
+		--python-package \
 		--debug
 
 # stop the feature-pipeline and delete the EC2 instance
 delete:
 	waxctl aws delete --name "bytewax" --yes
 
+# list all bytewax deployments
 list:
 	waxctl aws ls --verbose

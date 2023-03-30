@@ -8,7 +8,7 @@ apt autoremove -y python3-entrypoints/focal
 export HOPSWORKS_PROJECT_NAME=???
 export HOPSWORKS_API_KEY=???
 
-# add src library to PYTHONPATH, so we can write absolute imports
-# like "from src.config import FEATURE_GROUP_METADATA"
-export PYTHONPATH="${PYTHONPATH}:/home/ubuntu/bytewax"
-export PYTHONPATH="${PYTHONPATH}:/home/ubuntu/bytewax/src"
+# # add src library to PYTHONPATH, so we can write absolute imports
+# # like "from src.config import FEATURE_GROUP_METADATA"
+# export PYTHONPATH="${PYTHONPATH}:/home/ubuntu/bytewax"
+# export PYTHONPATH="${PYTHONPATH}:/home/ubuntu/bytewax/src"
