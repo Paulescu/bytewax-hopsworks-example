@@ -18,7 +18,6 @@ project-files:
 deploy: project-files
 	waxctl aws deploy project-files.tar \
 		-f src/dataflow.py \
-		-r requirements.txt \
 		--system-setup-file-name ./setup-ec2.sh \
 		--region us-east-1 \
 		-t t2.micro \
