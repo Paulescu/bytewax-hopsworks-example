@@ -9,8 +9,8 @@ python = ">=3.9,<3.10"
 ta = "^0.10.2"
 bytewax = "^0.15.1"
 websocket-client = "^1.5.1"
-python-dotenv = "^1.0.0"
 hopsworks = "^3.0.5"
+pyOpenSSL = "^23.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -205,8 +205,8 @@ def save_output_to_feature_store(
             `bytewax.dataflow.Dataflow.output` operator.
         """  # noqa
 
-        # max_buffer_size = 10
-        MAX_PARALLEL_EXECUTIONS = 5
+        max_buffer_size = 1 #10
+        # MAX_PARALLEL_EXECUTIONS = 5
 
         def __new__(cls, feature_group_metadata: FeatureGroupMetadata):
             """In classes defined by PyO3 we can only use __new__, not __init__"""

@@ -18,4 +18,4 @@
 
 - [x] Save features in Hopsworks
 - [x] Replace TA-lib with ta
-- [ ] Deploy flow to EC2
+- [x] Deploy flow to EC2

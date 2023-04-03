@@ -1,9 +1,12 @@
 .PHONY: deploy delete list project-files
 
+run:
+	poetry run python src/dataflow.py
+
 # generate a tar file with project files
 project-files:
 	tar \
-	--exclude={'.git','.gitignore','requirements.txt','poetry.lock','README.md','Makefile','setup-ec2.sh','.venv','*.tar','.DS_Store'} \
+	--exclude={'.git','.gitignore','requirements.txt','poetry.lock','README.md','Makefile','setup-ec2.sh','.venv','*.tar','.DS_Store','__pycache__'} \
 	-vzcf project-files.tar -C . .
 
 # deploy the feature-pipeline to an EC2 instance on AWS
