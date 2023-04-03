@@ -15,7 +15,8 @@ deploy: project-files
 		-t t2.micro \
 		--name "bytewax" \
 		--python-package \
-		--debug
+		--debug \
+		-E HOPSWORKS_PROJECT_NAME=${HOPSWORKS_PROJECT_NAME},HOPSWORKS_API_KEY=${HOPSWORKS_API_KEY}
 
 # stop the feature-pipeline and delete the EC2 instance
 delete:

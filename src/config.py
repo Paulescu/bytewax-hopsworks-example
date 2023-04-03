@@ -6,7 +6,7 @@ from src.types import FeatureGroupMetadata
 HOPSWORKS_PROJECT_NAME = os.environ['HOPSWORKS_PROJECT_NAME']
 HOPSWORKS_API_KEY = os.environ['HOPSWORKS_API_KEY']
 
-WINDOW_SECONDS = 5
+WINDOW_SECONDS = 30
 PRODUCT_IDS = [
     "ETH-USD",
     # "BTC-USD",
