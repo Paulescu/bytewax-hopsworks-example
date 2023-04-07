@@ -39,11 +39,6 @@ In this project we add *state* to our system through a a Feature Store. We use H
 - it is serverless, so we do not need to handle infrastructure
 - it has a very generous free tier, with up to 25GB of free storage.
 
-The final system is represented in the following diagram:
-
-<p align="center">
-  <img src="images/feature_pipeline.png" width='600' />
-</p>
 
 ## How to run this code
 
