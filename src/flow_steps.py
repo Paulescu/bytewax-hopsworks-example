@@ -18,6 +18,8 @@ from src.date_utils import str2epoch, epoch2datetime
 from src.feature_store_api import get_feature_group
 from src.logger import get_logger
 
+logger = get_logger()
+
 def connect_to_input_socket(flow: Dataflow):
     """Connects the given dataflow to the Coinbase websocket
 
@@ -187,6 +189,26 @@ def tuple_to_dict(flow: Dataflow):
      
     flow.map(_tuple_to_dict)
 
+
+from retry import retry
+from requests.exceptions import ConnectionError
+
+@retry(ConnectionError, tries=3, delay=10)
+def insert_data_to_feature_group(
+    feature_group: hsfs.feature_group.FeatureGroup,
+    data: pd.DataFrame
+) -> hsfs.core.job.Job:
+    try:
+        job, _ = feature_group.insert(
+            data,
+            write_options={"start_offline_backfill": False})
+        return job
+
+    except ConnectionError as e:
+        logger.error(f"Connection error: {e}")
+        logger.error("Retrying in 10 seconds...")
+        raise e
+
 def save_output_to_feature_store(
     flow: Dataflow,
     feature_group_metadata: FeatureGroupMetadata
@@ -205,7 +227,7 @@ def save_output_to_feature_store(
             `bytewax.dataflow.Dataflow.output` operator.
         """  # noqa
 
-        max_buffer_size = 1 #10
+        max_buffer_size = 10
         # MAX_PARALLEL_EXECUTIONS = 5
 
         def __new__(cls, feature_group_metadata: FeatureGroupMetadata):
@@ -224,10 +246,12 @@ def save_output_to_feature_store(
                     df = pd.DataFrame.from_records([item])
 
                     cls.buffer_size += 1
-                    cls.job, _ = feature_group.insert(
-                        df,
-                        write_options={"start_offline_backfill": False}
-                        )   
+                    # cls.job, _ = feature_group.insert(
+                    #     df,
+                    #     write_options={"start_offline_backfill": False}
+                    #     )   
+                    cls.job = insert_data_to_feature_group(feature_group, df)
+                    logger.info(f'{type(cls.job)=}')
 
                     # check number of jobs currently running.
                     # n_parallel_executions = len(cls.job.get_executions())

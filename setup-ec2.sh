@@ -4,5 +4,5 @@ apt autoremove -y python3-pyasn1-modules/focal
 apt autoremove -y python3-pexpect/focal
 apt autoremove -y python3-entrypoints/focal
 
-pip install pip --upgrade
-pip install pyopenssl --upgrade
+# pip install pip --upgrade
+# pip install pyopenssl --upgrade
