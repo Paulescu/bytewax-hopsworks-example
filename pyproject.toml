@@ -11,6 +11,7 @@ bytewax = "^0.15.1"
 websocket-client = "^1.5.1"
 hopsworks = "^3.0.5"
 pyOpenSSL = "^23.1.1"
+retry = "^0.9.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
