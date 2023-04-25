@@ -227,7 +227,7 @@ def save_output_to_feature_store(
             `bytewax.dataflow.Dataflow.output` operator.
         """  # noqa
 
-        max_buffer_size = 10
+        max_buffer_size = 1 #10
         # MAX_PARALLEL_EXECUTIONS = 5
 
         def __new__(cls, feature_group_metadata: FeatureGroupMetadata):
@@ -251,7 +251,7 @@ def save_output_to_feature_store(
                     #     write_options={"start_offline_backfill": False}
                     #     )   
                     cls.job = insert_data_to_feature_group(feature_group, df)
-                    logger.info(f'{type(cls.job)=}')
+                    # logger.info(f'{type(cls.job)=}')
 
                     # check number of jobs currently running.
                     # n_parallel_executions = len(cls.job.get_executions())
