@@ -16,7 +16,9 @@ from src.flow_steps import (
     tuple_to_dict,
     save_output_to_feature_store,
 )
-from src.logger import get_logger
+from src.logger import get_console_logger
+
+logger = get_console_logger()
 
 def get_dataflow(
     window_seconds: int,
@@ -40,26 +42,26 @@ def get_dataflow(
     return flow
 
 if __name__ == "__main__":
-    
-    logger = get_logger()
-    
+
     logger.info('Parsing command line arguments...')
+
     parser = ArgumentParser()
-    parser.add_argument('--dev', action='store_true')
+    parser.add_argument('--debug', action='store_true')
     parser.set_defaults(dev=False)
     args = parser.parse_args()
 
-    # Test inputs/outputs for debugging
-    # WINDOW_SECONDS = 5
-    logger.info('Generating dataflow')
-    test_flow = get_dataflow(window_seconds=config.WINDOW_SECONDS)
+    logger.info('Creating dataflow...')
+    data_flow = get_dataflow(window_seconds=config.WINDOW_SECONDS)
     
-    if args.dev:
-        test_flow.capture(StdOutputConfig())
+    # breakpoint()
+
+    if args.debug:
+        logger.info('Running dataflow in debug mode')
+        data_flow.capture(StdOutputConfig())
     else:
         from src.config import FEATURE_GROUP_METADATA
-        save_output_to_feature_store(test_flow, FEATURE_GROUP_METADATA)
+        save_output_to_feature_store(data_flow, FEATURE_GROUP_METADATA)
     
     logger.info('Running dataflow')
-    run_main(test_flow)
+    run_main(data_flow)
     

@@ -84,3 +84,12 @@ In this project we add *state* to our system through a a Feature Store. We use H
 
 Check the [Real-World ML Program](https://realworldmachinelearning.carrd.co/), a hands-on, 3-hour course where you will learn
 how to design, build, [deploy](https://taxi-demand-predictor.streamlit.app/), and [monitor](https://taxi-demand-predictor-monitoring.streamlit.app/) complete ML products.
+
+# TODOs
+* [x] Set env variables script
+* [x] Run in debug mode
+* [x] Create onlne feature groups
+* [x] Pipeline runs locally
+* [ ] Streamlit app
+* [ ] Deploy pipeline - waxctl
+* [ ] Bytewax 2.0 API
